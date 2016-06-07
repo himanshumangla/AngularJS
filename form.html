@@ -1,0 +1,27 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp"  ng-controller="formController as formCtrl">
+<script type="text/javascript" src="app.js"></script>
+<h4>
+
+<ul class="nav nav-pills">
+<li ng-click="show= (!show)">Add/View
+<div ng-show="show" ng-repeat="detail in formCtrl.details">The name is :{{detail.name}}<br>
+The class is :{{detail.class}}<br>
+The email is :{{detail.email}}<br>
+The address is :{{detail.address}}<br>
+<button class="nav nav-pills">Edit</button>
+<button class="nav nav-pills" ng-click="formCtrl.delete()">Delete</button>
+<br><br><br></div>
+<div ng-show="(!show)" class="panel"><form name="Details"><br><br>
+Name:<input type="text" name="nam"><br><br>
+Class:<input type="text" name="class"><br><br>
+Email:<input type="email" name="email"><br><br>
+Address<input type="text" name="address"><br><br>
+<button ng-click="formCtrl.submit()"> Submit</button></h4></form></div>
+</body>
+</html>
