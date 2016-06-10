@@ -1,0 +1,212 @@
+{
+  "version": 356,
+  "tenantid": "DTC",
+  "mobappid": 1065,
+  "appName": "DTU ",
+  "appDisplayName": "DCE",
+  "homeScreenTemplate": "<script>\r\n    MyCampusApp.rootScope.animatepage = function(currentstyle) {\r\n        $(\".app-body\").addClass(currentstyle);\r\n    }\r\n    var hideInterval = setInterval(function() {\r\n        var animatecss = $(\"#animatecss\");\r\n        if (!animatecss || animatecss.length <= 0) {\r\n            $.ajax({\r\n                url: \"https://raw.githubusercontent.com/daneden/animate.css/master/animate.css\",\r\n                dataType: \"text\",\r\n                success: function(data) {\r\n                    $(\"head\").append(\"<style id='animatecss'>\" + data + \"<\/style>\");\r\n                    clearInterval(hideInterval);\r\n                }\r\n            });\r\n        }\r\n    }, 2000);\r\n    if (!MyCampusApp.rootScope.cangelistadded) {\r\n        MyCampusApp.rootScope.$on(\"$routeChangeStart\", function(event, next, current) {\r\n            $(\".app-body\").attr(\"class\", \"app-body animated \");\r\n        });\r\n        MyCampusApp.rootScope.$on(\"$routeChangeSuccess\", function(event, next, current) {\r\n            currentstyle = \"bounceInRight\";\r\n            if (next.loadedTemplateUrl == \"partials/home.html\" && current.loadedTemplateUrl != \"partials/home.html\") {\r\n                currentstyle = \"bounceInLeft\";\r\n            } else if(current.loadedTemplateUrl != \"partials/home.html\") {\r\n                if (next.params.appid == current.params.appid && next.params.appid == next.params.pageid) {\r\n                    currentstyle = \"bounceInLeft\";\r\n                }\r\n              \tif (MyCampusApp.rootScope.ppage) {\r\n                \tif (MyCampusApp.rootScope.ppage.appid == next.params.appid && MyCampusApp.rootScope.ppage.pageid == next.params.pageid) {\r\n                    \tcurrentstyle = \"bounceInLeft\";\r\n                \t}\r\n                }\r\n            }\r\n            $(\".app-body\").addClass(currentstyle);\r\n            $(\".app-body\").addClass(\"animated\");\r\n            MyCampusApp.rootScope.cpage = next.params;\r\n            MyCampusApp.rootScope.ppage = current.params;\r\n        });\r\n        MyCampusApp.rootScope.cangelistadded = true;\r\n    }\r\n<\/script>",
+  "middlewareServerUrl": null,
+  "feedbackEmail": null,
+  "backgroundurl": "DTC/background.png",
+  "brandingurl": "DTC/branding.png",
+  "customStyle": "#branding {\r\n  position:absolute !important;\r\n  bottom:40px;\r\n  left:0px !important;\r\n  right:0px !important;\r\n  width:50% !important;\r\n  margin:auto !important;\r\n}\r\nbody {\r\n   position:absolute;\r\n   width:100%;\r\n   height:100%;\r\n   background-size:100% 100% !important;\r\n}\r\n.icon {\r\n   width:56px !important;\r\n   height:56px !important;\r\n}\r\n.campuseai-Info {\r\n  color:white;\r\n}\r\n.dockicon:after {\r\n   bottom:0px !important;\r\n}\r\n\r\n.dockicon {\r\n   margin-bottom:25px !important;\r\n}\r\n\r\n\r\n.blockUI i{\r\n   color:white !important;\r\n}\r\n\r\n@media (min-width: 768px) { \r\n   #branding {\r\n      width:50% !important;\r\n      margin:auto;    \r\n   }\r\n   .icon {\r\n      width:102px !important;\r\n      height:102px !important;\r\n    }\r\n}\r\n\r\n.promptumenu_nav a.active {\r\n   background:#fff;\r\n   border-radius:50%;\r\n   width:10px;\r\n   height:10px;\r\n}\r\n\r\n.promptumenu_nav a {\r\n  background:#00162f;\r\n   border-radius:50%;\r\n   width:10px;\r\n   height:10px;\r\n}\r\n.promptumenu_window {\r\n   overflow:visible !important; \r\n}\r\n\r\n.promptumenu_nav {\r\nmargin-bottom:-3px;\r\n}\r\n\r\n.app-body {\r\n   padding-bottom:19px !important;\r\n}\r\n\r\n.blockUI {\r\n  margin:auto !important;\r\n  left:0px  !important;\r\n  right:0px !important;\r\n  width:auto !important;\r\n}\r\n\r\n#homedata .campuseai-Info {\r\n  width:76px !important;\r\n  margin-left:-10px;\r\n}\r\n@media (min-width : 320px) and (max-width : 480px) { \r\n   .icon { width:56px !important;\r\n     height:56px !important;\r\n   }\r\n   #homedata .campuseai-Info {\r\n     width:76px !important;\r\n     margin-left:-10px;\r\n   }\r\n}\r\n\r\n@media (min-width : 320px) and (max-width : 568px) { \r\n   .icon { width:63px !important;\r\n\t   height:63px !important;\r\n   }\r\n   #homedata .campuseai-Info {\r\n     width:83px !important;\r\n     margin-left:-10px;\r\n   }\r\n}\r\n\r\n#mainSidebar .list-group-item {\r\n  border-bottom:1px solid #000 !important;\r\n}\r\n\r\n#homedata .campuseai-Info {\r\n  font-weight:bold;\r\n  text-shadow:2px 2px 2px #000;\r\n}",
+  "authFunction": "function authFunction(uname, password, $http, $rootScope, success, error) {\r\n  alert (\"Tenant from Mycampus : \" + MyCampusApp.config.tenant);\r\n  alert (\"Tenant from Jstorage : \" + $.jStorage.get('tenant'));\r\n  $.jStorage.deleteKey('tenant');\r\n    var authSuccess = success;\r\n    var authError = error;\r\n    //Peoplesoft authentication\r\n    /*\r\n    var url = $rootScope.middlewareServerUrl + \"/services/ps/psholds\";\r\n    var data = {};\r\n    if (window.device) {\r\n        data = \"userId=\" + uname + \"&password=\" + password;\r\n    } else {\r\n        url = \"/websimulator/json?url=\" + url;\r\n        data = {\r\n            method: \"POST\",\r\n            body: \"userId=\" + uname + \"&password=\" + password\r\n        };\r\n    }\r\n    $.blockUI({\r\n        message: '<div style=\"margin: 2px; vertical-align: middle; display: inline-block\"><i class=\"icon-cog icon-spin icon-4x\"><\/i><h3>Authenticating<\/h3><\/div>'\r\n    });\r\n    alert(\"URL : \" + url);\r\n    $http.post(url, data).success(function (data, status, headers, config) {\r\n        success(data);\r\n        $.unblockUI();\r\n    }).error(function (data, status, headers, config) {\r\n        error(data);\r\n        $.unblockUI();\r\n    });\r\n*/\r\n    //Banner Authentication with CAS\r\n\r\n    /*var url = \"https://my.curry.edu/cas/v1/tickets/\";\r\n    var data = {};\r\n    if (window.device) {\r\n        data = \"username=\" + uname + \"&password=\" + password;\r\n    } else {\r\n        url = \"/websimulator/text?url=\" + url;\r\n        data = {\r\n            method: \"POST\",\r\n            body: \"username=\" + uname + \"&password=\" + password\r\n        };\r\n    }\r\n\r\n    $rootScope.generateST = function (tgt, service, callback) {\r\n        var data = {};\r\n        if (window.device) {\r\n            data = \"service=\" + service;\r\n        } else {\r\n            url = \"/websimulator/text?url=\" + \"https://my.curry.edu/cas/v1/tickets/\";\r\n            data = {\r\n                method: \"POST\",\r\n                body: \"service=\" + service\r\n            };\r\n        }\r\n\r\n        $.ajax({\r\n            url: url + tgt,\r\n            type: \"POST\",\r\n            async: true,\r\n            data: data,\r\n            error: function (response) {\r\n                alert(\"Error : \" + response);\r\n\r\n            },\r\n            success: function (data) {\r\n                //alert(\"Success : \" + data);\r\n                callback(data);\r\n            }\r\n        });\r\n\r\n    };\r\n\r\n    $.blockUI({\r\n        message: '<div style=\"margin: 2px; vertical-align: middle; display: inline-block\"><i class=\"icon-cog icon-spin icon-4x\"><\/i><h3>Authenticating<\/h3><\/div>'\r\n    });\r\n    $.ajax({\r\n        url: url,\r\n        type: \"POST\",\r\n        async: true,\r\n        data: data,\r\n        error: function (response) {\r\n            $.unblockUI();\r\n        },\r\n        success: function (data) {\r\n            //alert(\"Success : \" + data);\r\n            $.unblockUI();\r\n\r\n        },\r\n        complete: function (response, textStatus) {\r\n            //alert(\"complete : \" + response + \"  text status : \" + textStatus);\r\n            $.unblockUI();\r\n            if (textStatus == \"success\" && response.status == 201) {\r\n                var str = response.getResponseHeader('Location');\r\n                var tgtTicket = str.substr(str.lastIndexOf('/') + 1);\r\n                //generateST(tgtTicket);\r\n                success({\r\n                    \"ticket\": tgtTicket\r\n                });\r\n                $rootScope.$apply(function () {\r\n\r\n                    $rootScope.setRoute(\"/home\");\r\n\r\n                });\r\n\r\n\r\n            } else {\r\n                success({\r\n                    \"error\": \"Oops! Cannot log you in. Please check your login details.\"\r\n                });\r\n            }\r\n        }\r\n\r\n    });*/\r\n\r\n\r\n    //Banner Authentication with LDAP - middlware auth\r\n\r\n    var url = $rootScope.middlewareServerUrl + \"/bannermobile2/services/authenticate/login\";\r\n    var data = {};\r\n    if (window.device) {\r\n        data = \"username=\" + uname + \"&password=\" + password;\r\n    } else {\r\n        url = \"/websimulator/json?url=\" + url;\r\n        data = {\r\n            method: \"POST\",\r\n            body: \"username=\" + uname + \"&password=\" + password\r\n        };\r\n    }\r\n    var authUrl = url;\r\n    var authData = data;\r\n    $rootScope.generateST = function(tgt, service, callback) {\r\n        //Bypassing the ST as there is no service ticket required here..\r\n        callback(tgt);\r\n    };\r\n\r\n    $rootScope.postAPI = function(endpoint, postdata, callback) {\r\n        $.blockUI();\r\n        $rootScope.generateST($rootScope.ticket, endpoint, function(st) {\r\n            var serviceurl = endpoint + \"?ticket=\" + st;\r\n            var url = \"\";\r\n            var proxyMethod = \"POST\";\r\n            var proxyData = postdata;\r\n            if (window.device) {\r\n                url = serviceurl;\r\n            } else {\r\n                url = \"/websimulator/json?url=\" + serviceurl;\r\n                proxyMethod = \"POST\";\r\n                proxyData = {\r\n                    method: \"POST\",\r\n                    body: postdata\r\n                }\r\n            }\r\n            $http({\r\n                method: proxyMethod,\r\n                url: url,\r\n                data: proxyData\r\n            }).\r\n            success(function(data, status, headers, config) {\r\n                $.unblockUI();\r\n                callback(data, status, headers, config);\r\n            }).\r\n            error(function(data, status, headers, config) {\r\n                $.unblockUI();\r\n                //alert(\"Error in service call : \" + data + \" Status : \" + status);\r\n                if (status == 403) { //Ticket expired.. need to relogin\r\n                    $http.post(authUrl, authData).success(function(data, status, headers, config) {\r\n                        authSuccess(data);\r\n                        $rootScope.getAPI(endpoint, callback);\r\n                    }).error(function(data, status, headers, config) {\r\n                        authError(data);\r\n\r\n                    });\r\n                }\r\n\r\n            });\r\n\r\n        });\r\n\r\n    };\r\n\r\n    $rootScope.getAPI = function(endpoint, callback) {\r\n        $.blockUI();\r\n        $rootScope.generateST($rootScope.ticket, endpoint, function(st) {\r\n            var serviceurl = endpoint + \"?ticket=\" + st;\r\n            var url = \"\";\r\n            var proxyMethod = \"GET\";\r\n            var proxyData = {};\r\n            if (window.device) {\r\n                url = serviceurl;\r\n            } else {\r\n                url = \"/websimulator/json?url=\" + encodeURIComponent(serviceurl);\r\n                proxyMethod = \"POST\";\r\n                proxyData = {\r\n                    method: \"GET\"\r\n                }\r\n            }\r\n            $http({\r\n                method: proxyMethod,\r\n                url: url,\r\n                data: proxyData\r\n            }).\r\n            success(function(data, status, headers, config) {\r\n                $.unblockUI();\r\n                callback(data, status, headers, config);\r\n            }).\r\n            error(function(data, status, headers, config) {\r\n                $.unblockUI();\r\n                //alert(\"Error in service call : \" + data + \" Status : \" + status);\r\n                if (status == 403) { //Ticket expired.. need to relogin\r\n                    $http.post(authUrl, authData).success(function(data, status, headers, config) {\r\n                        authSuccess(data);\r\n                        $rootScope.getAPI(endpoint, callback);\r\n                    }).error(function(data, status, headers, config) {\r\n                        authError(data);\r\n\r\n                    });\r\n                }\r\n\r\n            });\r\n\r\n        });\r\n\r\n    };\r\n\r\n\r\n\r\n\r\n    $.blockUI({\r\n        message: '<div style=\"margin: 2px; vertical-align: middle; display: inline-block\"><i class=\"icon-cog icon-spin icon-4x\"><\/i><h3>Authenticating<\/h3><\/div>'\r\n    });\r\n\r\n    $http.post(url, data).success(function(data, status, headers, config) {\r\n        success(data);\r\n        $.unblockUI();\r\n    }).error(function(data, status, headers, config) {\r\n        error(data);\r\n        $.unblockUI();\r\n    });\r\n\r\n}",
+  "forgotPasswordUrl": null,
+  "reportissueEmail": null,
+  "iconWidth": 70,
+  "apps": 
+  [
+    {
+      "id": 18273,
+      "name": "StaticPage4",
+      "displayname": "Static Page",
+      "logo": "DTC/StaticPage4.png",
+      "logourl": "DTC/StaticPage4.png",
+      "description": "Static Page",
+      "appFeatureType": "Public",
+      "roles": null,
+      "showInDock": false,
+      "showInHome": true,
+      "networkrequired": true,
+      "analytics": false,
+      "pages": 
+      [
+        {
+          "pageid": "StaticPage4",
+          "pageTemplate": "<div><\/div>",
+          "pageprocessor": "function pageprocessorStaticPage4(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {\r\n  var data1 = $compile($(pagedef.datatemplate))($scope);\r\n  $(\"#appContent\").append(data1);\r\n}\r\n$('#someButton').click(function() {\r\n  window.location.href = 'https://www.google.co.in';\r\n  return false;\r\n});",
+          "datatemplate": "<style>\r\n  .img1 {\r\n    float: left;\r\n    margin-left: 5%;\r\n    border: 0;\r\n  }\r\n  \r\n  .head1 {\r\n    padding-left: 10px;\r\n    margin-left: 5%;\r\n  }\r\n  \r\n  .cent {\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    border-radius: 50%;\r\n  }\r\n  \r\n  .para {\r\n    display: block;\r\n    margin-left: 20%;\r\n  }\r\n  \r\n  #imgsc {\r\n    margin-left: 45%\r\n  }\r\n  \r\n  h1.headiv {\r\n    position: relative;\r\n    left: 30px\r\n  }\r\n  \r\n  p.para {\r\n    position: relative;\r\n    left: 50px\r\n  }\r\n<\/style>\r\n<div>\r\n  <div class=\"img1\">\r\n    <img class=\"img-circle\" src=\"http://www.planwallpaper.com/static/images/518169-backgrounds.jpg\" height=\"60px\" width=\"60px\"><\/img>\r\n  <\/div>\r\n  <h1 class=\"head1\" align=\"center\">  lorem ipsum<\/h1>\r\n  <p align=\"center\"> is basically dummy text!<\/p>\r\n  <button class=\"btn btn-info\" class=\"cent\" id=\"someButton\" align=\"center\">SIGN UP<\/button>\r\n<\/div>\r\n<hr>\r\n<div>\r\n  <div class=\"img1\">\r\n    <img class=\"img-circle\" src=\"http://www.planwallpaper.com/static/images/518169-backgrounds.jpg\" height=\"60px\" width=\"60px\" /><\/div>\r\n  <h1 class=\"headiv\">head1<\/h1>\r\n  <p class=\"para\">Align left<\/p>\r\n<\/div>\r\n<hr>\r\n<div>\r\n  <div class=\"img1\">\r\n    <img class=\"img-circle\" src=\"http://www.planwallpaper.com/static/images/518169-backgrounds.jpg\" height=\"60px\" width=\"60px\"><\/div>\r\n  <h1 class=\"headiv\">head2<\/h1>\r\n  <p class=\"para\">Align left<\/p>\r\n<\/div>\r\n<hr>\r\n<div>\r\n  <div class=\"img1\">\r\n    <img class=\"img-circle\" src=\"http://www.planwallpaper.com/static/images/518169-backgrounds.jpg\" height=\"60px\" width=\"60px\"><\/div>\r\n  <h1 class=\"headiv\"><a href=\"https://www.google.co.in\">head3<\/a><\/h1>\r\n  <p class=\"para\">Align left<\/p>\r\n<\/div>\r\n<hr>\r\n<div>\r\n  <h3 align=\"center\">the shopping cart<\/h3>\r\n  <img class=\"img-circle\" id=\"imgsc\" src=\"http://www.planwallpaper.com/static/images/518169-backgrounds.jpg\" height=\"60px\" width=\"60px\">\r\n  <p class=\"para\">some bullet text here!!<\/p>\r\n<\/div>"
+        },
+        {
+          "pageid": "StaticPage4Page2",
+          "pageTemplate": "<div><\/div>",
+          "datatemplate": "<style>\r\n*\r\n{\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n#over\r\n{\r\n    position:absolute;\r\n    width:100%;\r\n    height:50%;\r\n    text-align: center; \r\n}\r\n\r\n.Centerer\r\n{\r\n    display: inline-block;\r\n    height: 100%;\r\n    vertical-align: middle;\r\n}\r\n.Centered\r\n{\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n}\r\n<\/style>\r\n\r\n<div id=\"over\" style=\"height:50%;\">\r\n  <span class=\"Centerer\"><\/span>\r\n  <img class=\"img-rounded\" class=\"Centered\" src=\"\">\r\n\t<h3>NAME<\/h3>\r\n\t<h2>LOCATION<\/h2>\r\n\r\n<\/div>\r\n<div class=\"container\" style=\"height:50%;\">\r\n\r\n  <form class=\"form-signin\">\r\n    <h2 class=\"form-signin-heading\">Please sign in<\/h2>\r\n    <label for=\"inputEmail\" class=\"sr-only\">Email address<\/label>\r\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required autofocus>\r\n    <label for=\"inputPassword\" class=\"sr-only\">Password<\/label>\r\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required>\r\n    <div class=\"checkbox\">\r\n      <label>\r\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\r\n      <\/label>\r\n    <\/div>\r\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign in<\/button>\r\n  <\/form>\r\n\r\n<\/div>",
+          "pageprocessor": "function pageprocessorStaticPage4Page2(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {var data1 = $compile($(pagedef.datatemplate))($scope);$(\"#appContent\").append(data1);}",
+          "endpoint": ""
+        },
+        {
+          "pageid": "StaticPage4Page3",
+          "pageTemplate": "<div><\/div>",
+          "endpoint": "",
+          "datatemplate": "<style>\r\n#main {\r\n  width: 90%;\r\n  height: 100px;\r\n  border: 1px solid red;\r\n}\r\n\r\n#head4 {\r\ndisplay:inline;\r\nmargin-right:10px;\r\ntext-align:left\r\n}\r\n\r\n#head5 {\r\ndisplay:inline;\r\ntext-align:right;\r\n\r\n}\r\n\r\n\r\n#parent_div_1, #parent_div_2, #parent_div_3 ,#parent_div_4 {\r\n  width: 45%;\r\n  height: 100px;\r\n  border: 1px solid red;\r\n  float: left;\r\n}\r\n.child_div_1 {\r\n  float: left;\r\n  margin-right: 5px;\r\n}\r\n<\/style>\r\n  \r\n  \r\n<div id=\"main\" >\r\n<h4 id=\"head4\">left text<\/h4>\r\n<h4 id=\"head5\" >right text<\/h4>\r\n<\/div>\r\n\r\n<div id=\"parent_div_1\">a<\/div>\r\n<div id=\"parent_div_2\">b<\/div>\r\n\r\n<div id=\"parent_div_3\">c<\/div>\r\n<div id=\"parent_div_4\">d<\/div>\r\n<\/div>",
+          "pageprocessor": "function pageprocessorStaticPage4Page3(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {var data1 = $compile($(pagedef.datatemplate))($scope);$(\"#appContent\").append(data1);}"
+        },
+        {
+          "pageid": "StaticPage4Page4",
+          "pageTemplate": "<div><\/div>",
+          "endpoint": "",
+          "datatemplate": "<div>Sample Data<\/div>",
+          "pageprocessor": "function pageprocessorStaticPage4Page4(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {var data1 = $compile($(pagedef.datatemplate))($scope);$(\"#appContent\").append(data1);}"
+        }
+      ]
+    },
+    {
+      "id": 18321,
+      "name": "Test23",
+      "displayname": "Test",
+      "logo": "DTC/Test23.png",
+      "logourl": "DTC/Test23.png",
+      "description": "Test",
+      "appFeatureType": "Public",
+      "roles": null,
+      "showInDock": false,
+      "showInHome": true,
+      "networkrequired": true,
+      "analytics": false,
+      "pages": 
+      [
+        {
+          "pageid": "Test23",
+          "pageTemplate": "<div><\/div>",
+          "pageprocessor": "function pageprocessorTest23(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {var data1 = $compile($(pagedef.datatemplate))($scope);$(\"#appContent\").append(data1);}",
+          "datatemplate": "<style>\r\n  #main {\r\n    height: 200px;\r\n    border: 1px solid white;\r\n    margin-bottom: 300px;\r\n    margin-top: 13%;\r\n    display: table-cell;\r\n    text-align: center;\r\n    vertical-align: middle;\r\n    width: 900px;\r\n    background-image: url(\"https://cdn.theatlantic.com/assets/media/img/photo/2015/11/images-from-the-2016-sony-world-pho/s01_130921474920553591/main_1200.jpg\");\r\n    background-size: 100% 100%\r\n  }\r\n  \r\n  #head1 {\r\n    color: white\r\n  }\r\n  \r\n  #head4 {\r\n    display: inline;\r\n    margin-right: 10px;\r\n    padding-bottom: 40%;\r\n    text-align: left\r\n  }\r\n  \r\n  #head5 {\r\n    display: inline;\r\n    text-align: right;\r\n  }\r\n  \r\n  #parent_div_1,\r\n  #parent_div_2,\r\n  #parent_div_3,\r\n  #parent_div_4 {\r\n    width: 50%;\r\n    height: 160px;\r\n    border: 1px solid white;\r\n    float: left;\r\n    background-image: url(\"http://www.planwallpaper.com/static/images/518169-backgrounds.jpg\");\r\n    background-size: 100% 100%;\r\n      margin-bottom: 0px\r\n  }\r\n  \r\n  .child_div_1 {\r\n    float: left;\r\n    margin-right: 5px;\r\n  }\r\n<\/style>\r\n\r\n\r\n<div id=\"main\">\r\n  <H1 id=\"head1\">Text<\/H1>\r\n<\/div>\r\n\r\n<div id=\"parent_div_1\">a<\/div>\r\n<div id=\"parent_div_2\">b<\/div>\r\n\r\n<div id=\"parent_div_3\">c<\/div>\r\n<div id=\"parent_div_4\">d<\/div>\r\n<\/div>"
+        }
+      ]
+    },
+    {
+      "id": 18323,
+      "name": "SIGNUP",
+      "displayname": "SIGNUP",
+      "logo": "DTC/SIGNUP.png",
+      "logourl": "DTC/SIGNUP.png",
+      "description": "SIGNUP",
+      "appFeatureType": "Public",
+      "roles": null,
+      "showInDock": false,
+      "showInHome": true,
+      "networkrequired": true,
+      "analytics": false,
+      "pages": 
+      [
+        {
+          "pageid": "SIGNUP",
+          "pageTemplate": "<div><\/div>",
+          "pageprocessor": "function pageprocessorSIGNUP(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {var data1 = $compile($(pagedef.datatemplate))($scope);$(\"#appContent\").append(data1);}",
+          "datatemplate": "<style>\r\n  #over {\r\n    position: relative;\r\n    // margin-top: 30px;\r\n    width: 100%;\r\n    text-align: center;\r\n  }\r\n  \r\n  .Centerer {\r\n    display: inline-block;\r\n    height: 100%;\r\n    vertical-align: middle;\r\n  }\r\n  \r\n  .Centered {\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n  }\r\n  \r\n  input[type=email],\r\n  input[type=password] {\r\n    border-radius: 10px;\r\n    margin-top: 15px;\r\n  }\r\n  \r\n  .container {\r\n    display: block;\r\n    position: relative;\r\n    margin-top: 15px;\r\n  }\r\n  \r\n  .posit {\r\n    position: absolute;\r\n    top: 30%;\r\n    left: 30%\r\n  }\r\n  \r\n  svg {\r\n    width: 30%;\r\n  }\r\n<\/style>\r\n\r\n<div id=\"over\">\r\n  <span class=\"Centerer\"><\/span>\r\n  <img class=\"img-rounded\" class=\"Centered\" src=\"http://www.planwallpaper.com/static/images/518169-backgrounds.jpg\" alt=\"image\">\r\n  <div class=\"posit\">\r\n    <img class=\"img-circle\" src=\"https://cdn.theatlantic.com/assets/media/img/photo/2015/11/images-from-the-2016-sony-world-pho/s01_130921474920553591/main_1200.jpg\" width=\"100px\" height=\"100px\" />\r\n    <h2>NAME<\/h2>\r\n    <h3>LOCATION<\/h3>\r\n  <\/div>\r\n<\/div>\r\n\r\n<div class=\"container\">\r\n\r\n  <form class=\"form-signin\">\r\n    <h2 class=\"form-signin-heading\">Please sign in<\/h2>\r\n    <label for=\"inputEmail\" class=\"sr-only\">Email address<\/label>\r\n    <input type=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\" required autofocus>\r\n    <label for=\"inputPassword\" class=\"sr-only\">Password<\/label>\r\n    <input type=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\" required>\r\n    <div class=\"checkbox\">\r\n      <label>\r\n        <input type=\"checkbox\" value=\"remember-me\"> Remember me\r\n      <\/label>\r\n    <\/div>\r\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign in<\/button>\r\n  <\/form>\r\n\r\n<\/div>"
+        },
+        {
+          "pageid": "SIGNUPPage2",
+          "pageTemplate": "<div><\/div>",
+          "endpoint": "",
+          "datatemplate": "<div>Sample Data<\/div>",
+          "pageprocessor": "function pageprocessorSIGNUPPage2(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {var data1 = $compile($(pagedef.datatemplate))($scope);$(\"#appContent\").append(data1);}"
+        }
+      ]
+    },
+    {
+      "id": 18624,
+      "name": "Location2",
+      "displayname": "Location",
+      "logo": "DTC/Location2.png",
+      "logourl": "DTC/Location2.png",
+      "description": "Location",
+      "appFeatureType": "Public",
+      "roles": null,
+      "showInDock": false,
+      "showInHome": true,
+      "networkrequired": true,
+      "analytics": false,
+      "pages": 
+      [
+        {
+          "pageid": "Location2",
+          "pageTemplate": "<div><\/div>",
+          "pageprocessor": "function pageprocessorLocation2(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {\r\n  var data1 = $compile($(pagedef.datatemplate))($scope);\r\n  $(\"#appContent\").append(data1);\r\n\r\n  $scope.clk = function() {\r\n    //var url = \"http://api.openweathermap.org/data/2.5/weather?q=\" + $scope.name + \"&APPID=0490c9d6beeeaf43b10edaa8a164acd6\";\r\n    var url = \"http://api.openweathermap.org/data/2.5/weather?q=delhi&APPID=0490c9d6beeeaf43b10edaa8a164acd6\";\r\n    $http.get(url).then(function(response) {\r\n    alert(JSON.stringify(response));\r\n      $scope.myData = response.data.main;\r\n    })\r\n  };\r\n\r\n};",
+          "datatemplate": "<style>\r\n  #CurWet {\r\n    margin-top: 25px;\r\n    color: white;\r\n    text-align: center;\r\n    margin-bottom: 15px\r\n  }\r\n<\/style>\r\n\r\n<div>\r\n  <input type=\"text\" ng-model=\"name\">\r\n  <button ng-click=\"clk()\">CLICK HERE!<\/button>\r\n  <h3 style=\"color:#fff;\">{{myData.temp}}<\/h3>\r\n\r\n\r\n<\/div>"
+        }
+      ]
+    },
+    {
+      "id": 18901,
+      "name": "CRUD",
+      "displayname": "CRUD",
+      "logo": "DTC/CRUD.png",
+      "logourl": "DTC/CRUD.png",
+      "description": "CRUD",
+      "appFeatureType": "Public",
+      "roles": null,
+      "showInDock": false,
+      "showInHome": true,
+      "networkrequired": true,
+      "analytics": false,
+      "pages": 
+      [
+        {
+          "pageid": "CRUD",
+          "pageTemplate": "<div><\/div>",
+          "pageprocessor": "function pageprocessorCRUD(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {\r\n  var data1 = $compile($(pagedef.datatemplate))($scope);\r\n  $(\"#appContent\").append(data1);\r\n\r\n  var objs = [{\r\n    name: 'Azurite',\r\n    class: 10,\r\n    email: \"joe@example.org\",\r\n    address: 'delhi'\r\n  }, {\r\n    name: 'Bloodstone',\r\n    class: 10,\r\n    email: \"john@sample.com\",\r\n    address: 'gurgaon'\r\n  }, {\r\n    name: 'crossaint',\r\n    class: 10,\r\n    email: \"bioajk@sb.com\",\r\n    address: 'haryana'\r\n  }, {\r\n    name: 'diamond',\r\n    class: 14,\r\n    email: \"j@a.com\",\r\n    address: 'punjab'\r\n  }];\r\n\r\n  $scope.details = objs;\r\n  $scope.newobject = {};\r\n  $scope.val = {};\r\n\r\n  $scope.submit = function() {\r\n    objs.push($scope.newobject);\r\n    $scope.newobject = {};\r\n    $scope.edit = false;\r\n  };\r\n\r\n  $scope.delet = function(val) {\r\n    var newobjarr = [];\r\n    for (i = objs.length - 1; i >= 0; i--) {\r\n      if (val.name == objs[i].name) {\r\n        objs.pop();\r\n        break;\r\n      } else {\r\n        var tempObj = objs.pop();\r\n        newobjarr.push(tempObj);\r\n      }\r\n    }\r\n    for (i = newobjarr.length; i > 0; i--) {\r\n      objs.push(newobjarr.pop());\r\n    }\r\n\r\n  };\r\n\r\n  $scope.editfun = function(val) {\r\n    $scope.edit = true;\r\n    $scope.show = !($scope.show);\r\n    var newobjarr = [];\r\n    for (i = objs.length - 1; i >= 0; i--) {\r\n      if (val.name == objs[i].name) {\r\n        var temp = objs.pop();\r\n      } else {\r\n        var tempObj = objs.pop();\r\n        newobjarr.push(tempObj);\r\n      }\r\n    }\r\n    for (i = newobjarr.length; i > 0; i--) {\r\n      objs.push(newobjarr.pop());\r\n    }\r\n    $scope.newobject.name = temp.name;\r\n    $scope.newobject.class = temp.class;\r\n    $scope.newobject.email = temp.email;\r\n    $scope.newobject.address = temp.address;\r\n\r\n  };\r\n\r\n}",
+          "datatemplate": "<div class=\"container-fluid\">\r\n  <h4>\r\n<div ng-show=\"show\" class=\"text-danger\">\r\n<div ng-repeat=\"detail in details | orderBy : 'name'\"><br><strong>\r\nName    :   {{detail.name}}<br>\r\nClass   :   {{detail.class}}<br>\r\nEmail   :   {{detail.email}}<br>\r\nAddress :   {{detail.address}}<br><\/strong>\r\n\r\n<button class=\"btn btn-success\" ng-click=\"editfun(detail)\">Edit<\/button> \r\n\r\n<button class=\"btn btn-warning\" ng-click=\"delet(detail)\">Delete<\/button>\r\n<br><br><br>\r\n<\/div>\r\n\r\n<button type=\"button\" class=\"btn btn-primary\" ng-click=\"show = (!show)\">ADD<\/button> \r\n\r\n<\/div>\r\n<div ng-show=\"(!show)\" class=\"panel\">\r\n<center>\r\n  <h2>CRUD FORM<\/h2>\r\n<form name=\"Details\" ng-submit = \"submit()\"><br><br>\r\n<fieldset class=\"form-group\">\r\n                <textarea name=\"name\" ng-pattern=\"/^[a-zA-Z]*$/\" ng-model = \"newobject.name\" placeholder = \"name\" title = \"Name\" required ><\/textarea>\r\n<\/fieldset>\r\n\r\n<fieldset class=\"form-group\">\r\n                <textarea name=\"class\" ng-model = \"newobject.class\" placeholder = \"class\" title = \"Class\" required onkeydown=\"return ( event.ctrlKey || event.altKey || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) || (95<event.keyCode && event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9)  || (event.keyCode>34 && event.keyCode<40) || (event.keyCode==46) )\"><\/textarea>\r\n<\/fieldset>\r\n\r\n<fieldset class=\"form-group\">\r\n                <textarea name=\"email\" ng-model = \"newobject.email\" placeholder = \"email\" title = \"Email\" type=\"email\" required><\/textarea>\r\n<\/fieldset>\r\n\r\n<fieldset class=\"form-group\">\r\n                <textarea name=\"address\" ng-model = \"newobject.address\" placeholder = \"address\" title = \"Address\" required><\/textarea>\r\n<\/fieldset>\r\n\r\n<fieldset>\r\n                <input type=\"submit\" class=\"btn btn-primary \" value=\"Submit\" ng-disabled=\"!(Details.name.$valid && Details.class.$valid && Details.email.$valid && Details.address.$valid)\"/>\r\n                <button type=\"button\" class=\"btn btn-primary\" ng-click=\"show = (!show)\" ng-hide = \"edit\">VIEW<\/button> \r\n<\/fieldset>\r\n\r\n<\/h4>\r\n  <\/form>\r\n  <\/center>\r\n<\/div>\r\n<\/div>"
+        }
+      ]
+    },
+    {
+      "id": 18903,
+      "name": "crud1",
+      "displayname": "crud1",
+      "logo": "DTC/crud1.png",
+      "logourl": "DTC/crud1.png",
+      "description": "crud1",
+      "appFeatureType": "Public",
+      "roles": null,
+      "showInDock": false,
+      "showInHome": true,
+      "networkrequired": true,
+      "analytics": false,
+      "pages": 
+      [
+        {
+          "pageid": "crud1",
+          "pageTemplate": "<div><\/div>",
+          "pageprocessor": "function pageprocessorcrud1(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {\r\n  var data1 = $compile($(pagedef.datatemplate))($scope);\r\n  $(\"#appContent\").append(data1);\r\n  var check = false;\r\n  var objs = [{\r\n    name: 'Azurite',\r\n    class: 10,\r\n    email: \"joe@example.org\",\r\n    address: 'delhi'\r\n  }, {\r\n    name: 'Bloodstone',\r\n    class: 10,\r\n    email: \"john@sample.com\",\r\n    address: 'gurgaon'\r\n  }];\r\n\r\n  $scope.details = objs;\r\n  $scope.newobject = {};\r\n\r\n  $scope.submit = function() {\r\n    $scope.hides = false;\r\n    objs.push($scope.newobject);\r\n    $scope.newobject = {};\r\n\r\n\r\n  };\r\n\r\n  $scope.delet = function(val) {\r\n    objs.splice(val, 1);\r\n\r\n  };\r\n  $scope.edits = function(index) {\r\n    $scope.show = !$scope.show;\r\n    $scope.newobject = {};\r\n    $scope.newobject.name = objs[index].name;\r\n    $scope.newobject.class = objs[index].class;\r\n    $scope.newobject.email = objs[index].email;\r\n    $scope.newobject.address = objs[index].address;\r\n    $scope.hides = true;\r\n\r\n    objs.splice(index, 1);\r\n  };\r\n\r\n}",
+          "datatemplate": "<div ng-show=\"show\" class=\"panel panel-info\">\r\n  <div ng-repeat=\"detail in details\">\r\n    <br> The name is :{{detail.name |uppercase}}\r\n    <br> The classname is :{{detail.class |uppercase}}\r\n    <br> The email is :{{detail.email |uppercase}}\r\n    <br> The address is :{{detail.address |uppercase}}\r\n    <br>\r\n\r\n    <button ng-click=\"delet($index)\" class=\"btn btn-danger\">Delete<\/button>\r\n    <button ng-click=\"shows = edits($index) \" class=\"btn btn-warning\">Edit<\/button>\r\n    <br>\r\n    <br>\r\n    <br>\r\n  <\/div>\r\n  <button type=\"button\" class=\"btn btn-success\" ng-click=\"show = (!show)\">ADD<\/button>\r\n<\/div>\r\n\r\n<div ng-show=\"(!show)\" class=\"panel panel-info\">\r\n\r\n  <form name=\"Details\" ng-submit=\"submit()\">\r\n    <br>\r\n    <br> NAME\r\n    <input type=\"text\" pattern=\"[a-z A-Z]+\" ng-model=\"newobject.name\" placeholder=\"Name\" name=\"Name\" class=\"form-control\" required />\r\n    <br />\r\n    <br /> CLASS\r\n    <input type=\"number\" ng-model=\"newobject.class\" placeholder=\"class\" name=\"Class\" class=\"form-control\" required>\r\n    <br />\r\n    <br /> EMAIL\r\n    <input type=\"email\" ng-model=\"newobject.email\" placeholder=\"email\" name=\"Email\" class=\"form-control\" required>\r\n    <br />\r\n    <br /> ADDRESS\r\n    <input type=\"text\" ng-model=\"newobject.address\" placeholder=\"address\" name=\"Address\" class=\"form-control\" required>\r\n    <br />\r\n    <br />\r\n\r\n\r\n    <fieldset>\r\n      <input type=\"submit\" class=\"btn btn-primary \" value=\"Submit\" ng-disabled=\"!(Details.Name.$valid && Details.Class.$valid && Details.Email.$valid && Details.Address.$valid)\" />\r\n      <button type=\" button \" class=\"btn btn-primary \" ng-click=\"show=( !show) \" ng-hide=\"hides\">VIEW<\/button>\r\n    <\/fieldset>\r\n\r\n    <\/h4>\r\n  <\/form>"
+        }
+      ]
+    },
+    {
+      "id": 18907,
+      "name": "CRUD2",
+      "displayname": "CRUD 2",
+      "logo": "DTC/CRUD2.png",
+      "logourl": "DTC/CRUD2.png",
+      "description": "CRUD 2",
+      "appFeatureType": "Public",
+      "roles": null,
+      "showInDock": false,
+      "showInHome": true,
+      "networkrequired": true,
+      "analytics": false,
+      "pages": 
+      [
+        {
+          "pageid": "CRUD2",
+          "pageTemplate": "<div><\/div>",
+          "pageprocessor": "function pageprocessorCRUD2(pagedef, $scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {\r\n  var data1 = $compile($(pagedef.datatemplate))($scope);\r\n  $(\"#appContent\").append(data1);\r\n\r\n  var objs = [{\r\n      name: 'Azurite',\r\n      class: 10,\r\n      email: \"joe@example.org\",\r\n      address: 'delhi'\r\n    }, {\r\n\r\n      name: 'Bloodstone',\r\n      class: 10,\r\n      email: \"john@sample.com\",\r\n      address: 'gurgaon'\r\n    },\r\n\r\n    {\r\n      name: 'diamond',\r\n      class: 14,\r\n      email: \"j@a.com\",\r\n      address: 'punjab'\r\n    }\r\n\r\n  ];\r\n\r\n\r\n  $scope.details = objs;\r\n  $scope.newobject = {};\r\n  $scope.val = {};\r\n  $scope.submit = function() {\r\n    objs.push($scope.newobject);\r\n    $scope.newobject = {};\r\n    $scope.edit1 = false;\r\n  };\r\n\r\n  $scope.delet = function(val) {\r\n    var newobjarr = [];\r\n\r\n    for (i = objs.length - 1; i >= 0; i--) {\r\n      if (val.name == objs[i].name) {\r\n        objs.pop();\r\n        break;\r\n      } else {\r\n        var tempObj = objs.pop();\r\n        newobjarr.push(tempObj);\r\n      }\r\n    }\r\n    for (i = newobjarr.length; i > 0; i--) {\r\n      objs.push(newobjarr.pop());\r\n    }\r\n\r\n  };\r\n\r\n  $scope.edit = function(val) {\r\n    var newobjarr = [];\r\n    $scope.edit1 = true;\r\n\r\n    $scope.show = (!($scope.show));\r\n    for (i = objs.length - 1; i >= 0; i--) {\r\n      if (val.name == objs[i].name) {\r\n        var tempObj = objs.pop();\r\n        $scope.newobject.name = tempObj.name;\r\n        $scope.newobject.email = tempObj.email;\r\n        $scope.newobject.class = tempObj.class;\r\n        $scope.newobject.address = tempObj.address;\r\n        break;\r\n      } else {\r\n        var tempObj = objs.pop();\r\n        newobjarr.push(tempObj);\r\n      }\r\n    }\r\n    for (i = newobjarr.length; i > 0; i--) {\r\n      objs.push(newobjarr.pop());\r\n    }\r\n\r\n  };\r\n\r\n\r\n}",
+          "datatemplate": "<h4>\r\n\r\n<div ng-show=\"show\" >\r\n\r\n<div ng-repeat=\"detail in details | orderBy: 'name'\" class=\"text-warning\"><br>\r\nThe name is :{{detail.name}}<br>\r\nThe class is :{{detail.class}}<br>\r\nThe email is :{{detail.email}}<br>\r\nThe address is :{{detail.address}}<br>\r\n<button type=\"button\" class=\"btn btn-danger\" ng-click=\"edit(detail)\">Edit<\/button>\r\n<button class=\"btn btn-danger\" ng-click=\"delet(detail)\">Delete<\/button>\r\n<br><br><br>\r\n<\/div>\r\n<button type=\"button\" class=\"btn btn-danger\" ng-click=\"show = (!show)\">Add<\/button> \r\n\r\n<\/div>\r\n\r\n<div ng-show=\"(!show)\" class=\"panel\">\r\n\r\n<form name=\"Details\" ng-submit = \"submit()\" class=\"form-group\">Enter the details:<br><br>\r\n<fieldset>\r\n\t<input name=\"name\" pattern=\"[a-z A-Z]+\" type=\"text\" ng-model = \"newobject.name\" placeholder = \"Name\" title = \"Name\" class=\"form-control\" required/>\r\n<\/fieldset>\r\n\r\n<fieldset>\r\n\t<textarea name=\"class\" type=\"numeric\" ng-model = \"newobject.class\" placeholder = \"Class\" title = \"Class\"  class=\"form-control\" required onkeydown=\"return ( event.ctrlKey || event.altKey \r\n                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) \r\n                    || (95<event.keyCode && event.keyCode<106)\r\n                    || (event.keyCode==8) || (event.keyCode==9) \r\n                    || (event.keyCode>34 && event.keyCode<40) \r\n                    || (event.keyCode==46) )\" ><\/textarea>\r\n<\/fieldset>\r\n\r\n<fieldset >\r\n\t<textarea name=\"email\" type=\"email\" ng-model = \"newobject.email\" placeholder = \"Email\" title = \"Email\"  class=\"form-control\" required><\/textarea>\r\n<\/fieldset>\r\n\r\n<fieldset>\r\n\t<textarea name=\"address\" type=\"text\" ng-model = \"newobject.address\" placeholder = \"Address\" title = \"Address\"  class=\"form-control\" required><\/textarea>\r\n<\/fieldset>\r\n\r\n<fieldset>\r\n\t<input type=\"submit\" ng-disabled=\"!(Details.name.$valid && Details.class.$valid && Details.email.$valid && Details.address.$valid)\" class=\"btn btn-danger \" value=\"Submit\" />\r\n\t<button type=\"button\" class=\"btn btn-danger\" ng-click=\"show = (!show)\" ng-hide = \"edit1\">View<\/button> \r\n<\/fieldset>\r\n\r\n<\/h4>\r\n<\/form>\r\n\r\n<\/div>"
+        }
+      ]
+    }
+  ],
+  "pages": 
+  [
+  ]
+}

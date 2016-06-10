@@ -1,0 +1,125 @@
+<style>
+
+
+
+    #dock .dockicon,
+    .screen .icon {
+        float: left;
+        width: 60px;
+        height: 60px;
+        background-repeat: no-repeat;
+        margin: 12px;
+        position: relative;
+    }
+
+
+        /* The dock icons get subtle shadows below them */
+
+    #dock .dockicon:after {
+        border-radius: 50px/10px;
+        bottom: 7px;
+        box-shadow: 0 5px 2px #000000;
+        content: "";
+        height: 1px;
+        position: absolute;
+        width: 58px;
+
+    }
+
+    #dock {
+        position:fixed;
+        bottom:18px;
+        left:0px;
+        right:0px;
+        background-image:url('img/dock.png');
+        background-size:100% 100%;
+        width:100%;
+        padding-left:10%;
+        z-index:20000;
+    }
+
+    .dockicon {
+        width:40px !important;
+        height:40px !important;
+        margin-top:-10px !important;
+        z-index:20000;
+    }
+    .dockicon:after {
+        content:attr(title) !important;
+        font-size:10px !important;
+        width:40px !important;
+        text-align:center;
+        color:white;
+    }
+    .navbar  {
+        margin-bottom:0px !important;
+    }
+    #branding {
+        position:fixed;
+        bottom:73px;
+        width:80%;
+        left:30px;
+        right:30px;
+        background-size:100% 100%;
+
+    }
+</style>
+
+
+<ul id="homedata">
+
+</ul>
+
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div id="homecontent"></div>
+        <!--<style>
+            #homeinfoarrow-up {
+                width: 0;
+                height: 0;
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+
+                border-bottom: 15px solid black;
+                margin-left:10px;
+            }
+            #homebranding {
+                padding:0 20px;
+            }
+            #homeinfo {
+                background:#000;
+                margin-left:10px;
+                margin-right:10px;
+                padding:10px;
+                color:#fff;
+                border-radius:0 10px 10px 10px;
+                box-shadow:0 0 10px;
+                margin-bottom:10px;
+            }
+        </style>
+        <div id="homeinfoarrow-up"></div>
+        <div id="homeinfo">Tap above to launch the menu</div>
+        <img id="homebranding" src="{{brandingUrl}}" />
+
+
+        <div style="background: none repeat scroll 0% 0% transparent; border: medium none; padding-top: 0px;" class="panel panel-primary well">
+            <div style="background:#000;" class="panel-heading">Aboout NSC</div>
+            <div class="panel-body">
+                <p>
+                    <img src="http://www.nsc.nevada.edu/images/banners/about01.jpg">
+                    The newest institution of higher learning in the state, Nevada State College is a comprehensive college with a commitment to educating students for success in the real world. At NSC, you’ll build a career, not just a job&mdash;and you’ll prepare to take charge of your future.
+                    <img src="http://www.nsc.nevada.edu/images/banners/about02.jpg">
+
+                    Nevada State College is a dynamic, young institution bursting with growth and the thrill of opportunity. Since our founding in 2002, our student body has grown to encompass more than 3,000 students representing a broad array of cultural and economic backgrounds, and our 2,000-plus alumni are living and working in every corner of the state and beyond.
+                    <img src="http://www.nsc.nevada.edu/images/banners/about03.jpg">
+                    The College’s main campus is located in Henderson, Nevada, just 15 miles from the world-famous Las Vegas Strip. The College also has a satellite campus in downtown Henderson.
+                    <img src="http://www.nsc.nevada.edu/images/banners/about04.jpg">
+                    <img src="http://www.nsc.nevada.edu/images/banners/about05.jpg">
+
+                </p>
+            </div>
+        </div>-->
+    </div>
+</div>
+
+

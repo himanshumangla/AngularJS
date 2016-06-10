@@ -1,0 +1,74 @@
+<style>#branding {
+    display: none;
+}
+.help-text {
+    text-align:justify;
+}
+.help-img {
+    box-shadow:0 0 10px #000;
+}
+div.list-group-item.active{
+    color:#ffffff !important;
+    background:#25458b !important;
+}
+</style>
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div id="helpgroup" class="list-group">
+            <div class="list-group-item" ng-show="firsttime == true" style="background:#fff;">
+                <div style='text-align:center;'>
+                    <img id="loginbranding" style='width:50%;margin:10px 0;' src="{{brandingUrl}}"/>
+                </div>
+                <style id="helpcustomstyle">
+                </style>
+                <div class="alert alert-info">
+                  Welcome! For the first time user, here is a quick guide to help with this app.<br/>
+
+                    <button class="btn btn-success" ng-click="gohome();">Press Me</button> to go to the Home screen.
+                </div>
+            </div>
+            <div class="list-group-item active"><strong>Navigation Home Screen Directions:</strong></div>
+            <div class="list-group-item">
+                <p class="help-text">
+                 Tap on the top left corner to launch the side bar navigation. When you are on the home screen, tap the top right corner icon to login and logout. For pages other than Home, the arrow icon displayed at the top right corner will take you back to the previous page.
+                </p>
+                <img class="help-img" src="img/help1.png" style="width:100%;"/>
+            </div>
+            <div class="list-group-item">
+                <p class="help-text">
+                    To view the apps on the next page please swipe right. Swipe left to navigate to the apps on the previous page.
+                </p>
+                <img class="help-img" src="img/help2.png" style="width:100%;"/>
+            </div>
+
+            
+            <div class="list-group-item active"><strong>How to Report an Issue with the App</strong></div>
+            <div class="list-group-item">
+                <p class="help-text">
+                    If you encounter an issue with the app, please use the <strong>Report Issue</strong> option located under the sidebar menu to report the same via email. Please attach a screenshot too, if applicable.
+                </p>
+            </div>
+            <div class="list-group-item active"><strong>Troubleshooting Steps</strong></div>
+            <div class="list-group-item">
+                <p class="help-text">
+                    If the app icons are not loading after the application update, use the <strong>Troubleshoot</strong> option located under the sidebar menu.
+                </p>
+                <br/>
+                <p class="help-text">
+                	Press the 'Reset My App' button to reset the app to the default settings. Once done, you will get an <strong>Update Manager</strong> popup. Press 'Yes' to proceed with the update.
+                </p>
+                <br/>
+                <p class="help-text">
+                	<strong>Please Note:</strong> Minimizing the app during the reset process can corrupt the app. You will have to reset the app again if it gets corrupted.
+                </p>
+            </div>
+
+        </div>
+<!--
+        <div class="1container">
+            <img src="img/help.png" style="width:100%;height:100%;"/>
+
+        </div>
+-->
+    </div>
+</div>

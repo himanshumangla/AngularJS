@@ -1,0 +1,38 @@
+<style>#branding {
+    display: none !important;
+}</style>
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div class="1container" style="padding:10px;">
+            <div class="1row">
+                <div style='text-align:center;'>
+                    <img id="loginbranding" style='width:65%;' src="{{brandingUrl}}"/>
+                </div>
+            </div>
+            <div class="1container" style="padding:5px;">
+                <form role="form" ng-submit="login();">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                            <input name="loginUsername" id="loginUsername" type="text" class="form-control"
+                                   placeholder="Username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+                            <input name="loginPassword" id="loginPassword" type="password" class="form-control"
+                                   placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                        </div>
+                    </div>
+                    <div id="fgpassword" ng-click="forgotpassword();" class="pull-right"
+                         style="cursor:pointer;color:#fff;padding-bottom:10px;font-weight:bold;">Forgot Password?
+                    </div>
+                    <button id="loginbtn" type="submit" class="btn btn-primary btn-lg btn-block">
+                        Login
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
