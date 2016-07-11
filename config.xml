@@ -2,7 +2,7 @@
     <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id = "com.kryptosmobile.DTC" version   = "1.0.0">
-        <name>DCE</name>
+        <name>DCE'S</name>
         <description>DTU </description>
         <author href="http://kryptosmobile.com" email="info@kryptosmobile.com">Kryptos Mobile Team</author>
         <feature name="http://api.phonegap.com/1.0/device" />
