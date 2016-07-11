@@ -90,7 +90,8 @@
         <gap:plugin name="de.appplant.cordova.plugin.email-composer"/>
         <gap:plugin name="com.hutchind.cordova.plugins.launcher"/>
         <gap:Plugin name="org.apache.cordova.camera" spec="0.3.6" source="pgb" /> 
-        <gap:Plugin name="cordova-plugin-actionsheet" source="npm" /> 
+        <gap:Plugin name="cordova-plugin-actionsheet" source="npm" />
+        <gap:Plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />
         <gap:config-file platform="ios" parent="UIStatusBarHidden" overwrite="true">
             <true/>
         </gap:config-file>
