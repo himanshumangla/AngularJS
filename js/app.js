@@ -74,7 +74,7 @@ document.addEventListener('deviceready',onDeviceReady, false);
 
 var MyCampusApp = {
     config : {
-        tenant : "DTC",
+        tenant : "TENANT_ID",
         serverUrl : "https://kryptos.kryptosmobile.com",
         tenantFolder : function(device, tenant) {
             if(device.platform == 'Android') {
@@ -665,9 +665,9 @@ var MyCampusApp = {
         var onError = function(e){
             downcounter--;
             $.unblockUI();
-            console.log("ERROR");
-            console.log(JSON.stringify(e));
-            alert ("Error inside onError : " + JSON.stringify(e));
+            //console.log("ERROR");
+            //console.log(JSON.stringify(e));
+           // alert ("Error inside onError : " + JSON.stringify(e));
 
         };
 

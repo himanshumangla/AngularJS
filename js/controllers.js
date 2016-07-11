@@ -104,6 +104,7 @@ angular.module('myApp.controllers', []).
     }])
     .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
         function ($scope, $rootScope, $http, $location) {
+                              MyCampusApp.homeScreenDisplayed=false;
             $rootScope.back = function () {
                 $location.path("/home");
             };
