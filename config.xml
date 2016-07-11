@@ -2,7 +2,7 @@
     <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id = "com.kryptosmobile.DTC" version   = "1.0.0">
-        <name>DCE'S</name>
+        <name>DCE</name>
         <description>DTU </description>
         <author href="http://kryptosmobile.com" email="info@kryptosmobile.com">Kryptos Mobile Team</author>
         <feature name="http://api.phonegap.com/1.0/device" />
@@ -89,7 +89,7 @@
         <gap:plugin name="com.phonegap.plugin.statusbar" />
         <gap:plugin name="de.appplant.cordova.plugin.email-composer"/>
         <gap:plugin name="com.hutchind.cordova.plugins.launcher"/>
-        <gap:Plugin name="org.apache.cordova.camera" spec="0.3.6" source="pgb" /> 
+        <gap:Plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" /> 
         <gap:Plugin name="cordova-plugin-actionsheet" source="npm" />
         <gap:Plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />
         <gap:config-file platform="ios" parent="UIStatusBarHidden" overwrite="true">
