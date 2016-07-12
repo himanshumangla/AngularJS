@@ -1,4 +1,4 @@
-Kryptos-Framework
+ANGULARJS
 =================
 
-Kryptos-Framework Files (assets, js, partials and index.html)
+Sample applet for AngularJS
